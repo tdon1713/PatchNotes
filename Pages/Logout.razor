@@ -1,0 +1,30 @@
+﻿@layout EmptyLayout
+@page "/Logout"
+
+@inject ISessionStorageService SessionStorage
+@inject NavigationManager navManager
+
+<MudCard Style="max-width: 400px; position:relative;" Class="mx-auto mt-6" Elevation="5">
+    <MudCardMedia Image="/images/taylordata-light.png" Height="113" Style="background-size:auto;" />
+    <MudCardContent Style="text-align: center;">
+        <MudText Typo="Typo.body1" Align="Align.Center">
+            Please wait while being logged out
+        </MudText>
+        <MudProgressCircular Color="Color.Default" Indeterminate="true" Class="mb-3 mt-5" />
+    </MudCardContent>
+</MudCard>
+
+@code { 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await Task.Delay(1500);
+        bool hasKey = await SessionStorage.ContainKeyAsync(Constants.SessionStorageNames.Token);
+        if (hasKey)
+        {
+            await SessionStorage.RemoveItemAsync(Constants.SessionStorageNames.Token);
+        }
+
+
+        navManager.NavigateTo("", forceLoad: true);
+    }
+}

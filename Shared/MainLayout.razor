@@ -1,0 +1,34 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIcon Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudText Typo="Typo.h5" Color="Color.Primary" Class="ml-3">Patch Notes</MudText>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <MudText Class="pl-6" Typo="Typo.subtitle2">Track, Build, &amp; Release</MudText>
+        </MudHidden>
+    </MudAppBar>
+
+    <MudMainContent>
+        <MudContainer Class="py-3" MaxWidth="MaxWidth.False">
+            <MudCard Style="max-width: 400px; position:relative;" Class="mx-auto mt-6" Elevation="5">
+                <MudCardMedia Image="/images/taylordata-light.png" Height="113" Style="background-size:auto;" />
+                <MudCardContent>
+                    <MudForm @ref="form" @bind-IsValid="@success" Class="mb-2">
+                        <MudTextField T="string" Label="Username" Required="true" RequiredError="Username is required!" @bind-Text="@_username" Margin="Margin.Normal" />
+                        <MudTextField T="string" Label="Password" InputType="InputType.Password" Required="true" RequiredError="Password is required!" @bind-Text="@_password" Margin="Margin.Normal" />
+                    </MudForm>
+
+                    <MudText Color="@Color.Error" Align="Align.Center">@_error</MudText>
+
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled" Class="ml-auto" OnClick="Login">Login</MudButton>
+                    </MudCardActions>
+                    <MudOverlay Visible="isLoggingIn" Absolute="true" DarkBackground="true">
+                        <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                    </MudOverlay>
+                </MudCardContent>
+            </MudCard>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

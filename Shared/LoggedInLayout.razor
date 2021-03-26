@@ -1,0 +1,49 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Color="Color.Primary">Patch Notes</MudText>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <MudText Class="pl-6" Typo="Typo.subtitle2">Track, Build, &amp; Release</MudText>
+        </MudHidden>
+    </MudAppBar>
+
+
+    <MudDrawer @bind-Open="_drawerOpen" PreserveOpenState="true" Elevation="1" ClipMode="DrawerClipMode.Docked">
+        <MudHidden Breakpoint="Breakpoint.MdAndUp">
+            <MudDrawerHeader>
+                <MudDrawerContainer Style="width: 100%;">
+                    <MudText Typo="Typo.h5" Class="mt-1" Color="Color.Primary">Patch Notes</MudText>
+                    <MudText Class="px-2" Typo="Typo.caption">Track, Build, &amp; Release</MudText>
+                </MudDrawerContainer>
+            </MudDrawerHeader>
+        </MudHidden>
+        <MudNavMenu>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard" Href="User/Dashboard">
+                    <MudText Typo="Typo.h6" Class="py-1">Dashboard</MudText>
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Work" Href="User/Companies">
+                    <MudText Typo="Typo.h6" Class="py-1">Companies</MudText>
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Widgets" Href="User/Projects">
+                    <MudText Typo="Typo.h6" Class="py-1">Projects</MudText>
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.CalendarToday" Href="User/Schedule">
+                    <MudText Typo="Typo.h6" Class="py-1">Schedule</MudText>
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.History" Href="User/History">
+                    <MudText Typo="Typo.h6" Class="py-1">History</MudText>
+                </MudNavLink>
+                <MudNavLink Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Logout" Href="Logout">
+                    <MudText Typo="Typo.h6" Class="py-1">Logout</MudText>
+                </MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer Class="py-3" MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Edge="Edge.Start" />
+        <MudText Typo="Typo.h5" Color="Color.Primary">Patch Notes</MudText>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <MudText Class="pl-6" Typo="Typo.subtitle2">Track, Build, &amp; Release</MudText>
+        </MudHidden>
+    </MudAppBar>
+
+    <MudMainContent>
+        <MudContainer Class="py-3" MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

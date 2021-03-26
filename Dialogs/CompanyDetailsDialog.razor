@@ -1,0 +1,22 @@
+﻿<MudDialog DisableSidePadding="true">
+    <DialogContent>
+        @ContentText
+    </DialogContent>
+    <DialogContent>
+        <MudContainer Style="max-height: 400px; overflow-y: scroll;">
+            <MudForm @ref="form" @bind-IsValid="@success">
+                <MudTextField T="string" Label="Name" Required="true" RequiredError="Company is required!" @bind-Text="@Company.Name" Margin="Margin.Normal" />
+                <MudTextField T="string" Label="Notes" @bind-Text="@Company.Notes" Margin="Margin.Normal" Lines="3" />
+                <MudCheckBox @bind-Checked="@Company.Archived" Label="Is Archived?" Color="Color.Primary"></MudCheckBox>
+            </MudForm>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Delete" Disabled="Company.IsNew" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+<MudOverlay Visible="isLoading" Absolute="true" DarkBackground="true">
+    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+</MudOverlay>

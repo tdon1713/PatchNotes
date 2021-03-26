@@ -1,0 +1,33 @@
+﻿@page "/User/Companies"
+
+<MudTable Items="_companies" FixedHeader="true" Hover="true" Breakpoint="Breakpoint.Xs" T="Company" OnRowClick="OnCompanyClicked">
+    <ToolBarContent>
+        <MudText Typo="Typo.h5">Companies</MudText>
+        <MudToolBarSpacer />
+        <MudButton Size="Size.Medium" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@((e) => ViewCompanyDetails(e))">New Company</MudButton>
+    </ToolBarContent>
+    <ColGroup>
+        <col />
+        <col style="width: 10%;" />
+        <col style="width: 10%;" />
+        <col />
+    </ColGroup>
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh Style="text-align: center;"># Projects</MudTh>
+        <MudTh Style="text-align: center;"># Releases</MudTh>
+        <MudTh>Created Date (UTC)</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="# Projects" Style="text-align: center;">@context.Projects.Count</MudTd>
+        <MudTd DataLabel="# Releases" Style="text-align: center;">@context.Versions.Count</MudTd>
+        <MudTd DataLabel="Created Date (UTC)">@context.CreatedDate_Display</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+<MudOverlay Visible="@isDataLoading" ZIndex="9999" DarkBackground="true">
+    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+</MudOverlay>
