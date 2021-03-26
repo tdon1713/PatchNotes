@@ -50,7 +50,7 @@ namespace PatchNotes.Pages.User
         {
             isDataLoading = true;
 
-            _companies = await CompanyService.GetCompaniesAsync();
+            _companies = await CompanyService.GetAsync();
 
             isDataLoading = false;
         }

@@ -19,7 +19,15 @@ namespace PatchNotes.Data
             _configuration = configuration;
         }
 
-        public async Task<IEnumerable<Company>> GetCompaniesAsync()
+        public async Task DeleteAsync(Guid id)
+        {
+            using var conn = new SqlConnection(_configuration.GetConnectionString(Constants.PatchNotesConnectionStringName));
+            await conn.OpenAsync();
+            var sql = "DELETE Companies WHERE ID = @Id";
+            await conn.ExecuteAsync(sql, new { Id = id });
+        }
+
+        public async Task<IEnumerable<Company>> GetAsync()
         {
             using var conn = new SqlConnection(_configuration.GetConnectionString(Constants.PatchNotesConnectionStringName));
             var sql = "SELECT c.*, p.ID, v.ID " +
