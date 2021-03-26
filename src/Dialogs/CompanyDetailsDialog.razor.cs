@@ -20,6 +20,8 @@ namespace PatchNotes.Dialogs
 
         [Inject] CompanyService CompanyService { get; set; }
 
+        [Inject] IDialogService DialogService { get; set; }
+
         async Task Submit()
         {
             try
@@ -42,9 +44,21 @@ namespace PatchNotes.Dialogs
 
         void Cancel() => MudDialog.Cancel();
 
-        void Delete()
+        async void Delete()
         {
-            MudDialog.Close(DialogResult.Ok(true));
+            var parameters = new DialogParameters();
+            parameters.Add(nameof(ConfirmCancelDialog.ContentText), "Are you sure you want to delete this company? This process cannot be undone");
+            parameters.Add(nameof(ConfirmCancelDialog.ButtonText), "Delete");
+            parameters.Add(nameof(ConfirmCancelDialog.Color), Color.Error);
+
+            var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall };
+            var dialog = DialogService.Show<ConfirmCancelDialog>("Delete", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await CompanyService.DeleteAsync(Company.ID);
+                MudDialog.Close(DialogResult.Ok(true));
+            }
         }
     }
 }
