@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using MudBlazor.Services;
 using PatchNotes.Data;
@@ -46,6 +47,20 @@ namespace PatchNotes
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //Provide a path outside of the wwwroot
+            //Usage: Fanart/77253244_p0.jpg
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(@"D:\Images\Fanart"),
+            //    RequestPath = "/Fanart"
+            //});
+
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(@"\\PLEX\Shared"),
+            //    RequestPath = "/PlexShared"
+            //});
 
             app.UseRouting();
 
